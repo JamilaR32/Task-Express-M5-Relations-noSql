@@ -9,7 +9,7 @@ exports.fetchPost = async (postId, next) => {
   }
 };
 
-exports.postsDelete = async (req, res) => {
+exports.postsDelete = async (req, res, next) => {
   try {
     await Post.findByIdAndRemove({ _id: req.post.id });
     res.status(204).end();
@@ -18,7 +18,7 @@ exports.postsDelete = async (req, res) => {
   }
 };
 
-exports.postsUpdate = async (req, res) => {
+exports.postsUpdate = async (req, res, next) => {
   try {
     await Post.findByIdAndUpdate(req.post.id, req.body);
     res.status(204).end();
@@ -27,9 +27,9 @@ exports.postsUpdate = async (req, res) => {
   }
 };
 
-exports.postsGet = async (req, res) => {
+exports.postsGet = async (req, res, next) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().populate("authorId");
     res.json(posts);
   } catch (error) {
     next(error);
