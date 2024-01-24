@@ -1,18 +1,9 @@
-const Post = require('../../models/Post');
+const Post = require("../../models/Post");
 
 exports.fetchPost = async (postId, next) => {
   try {
     const post = await Post.findById(postId);
     return post;
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.postsCreate = async (req, res) => {
-  try {
-    const newPost = await Post.create(req.body);
-    res.status(201).json(newPost);
   } catch (error) {
     next(error);
   }
