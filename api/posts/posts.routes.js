@@ -7,6 +7,7 @@ const {
   postsDelete,
   postsCreate,
 } = require("./posts.controllers");
+const { tagAdd } = require("../tag/controllers");
 
 router.param("postId", async (req, res, next, postId) => {
   const post = await fetchPost(postId, next);

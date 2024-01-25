@@ -4,13 +4,13 @@ const Post = require("../../models/Post");
 const postsCreate = async (req, res, next) => {
   try {
     const { authorId } = req.params;
-
     const author = await Author.findById(authorId);
     if (!authorId) {
       return res.status(404).json(" author Not Found");
     }
     req.body.author = authorId;
     const newPost = await Post.create(req.body);
+
     await author.updateOne({ $push: { posts: newPost._id } });
     res.status(201).json(newPost);
   } catch (error) {

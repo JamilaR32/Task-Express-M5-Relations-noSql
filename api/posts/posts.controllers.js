@@ -29,7 +29,7 @@ exports.postsUpdate = async (req, res, next) => {
 
 exports.postsGet = async (req, res, next) => {
   try {
-    const posts = await Post.find().populate("authorId");
+    const posts = await Post.find().populate("tags");
     res.json(posts);
   } catch (error) {
     next(error);
